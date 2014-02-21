@@ -166,6 +166,8 @@ to look at if you like, it is subject to change before its official posting.
 
 <h2> Tentative Schedule & Handouts </h2>
 
+<a id="search-by-date" href="NOLINK">Go To Next Class Date</a>
+
 <table border="on" class="zebra table table-striped">
 
 <tr> <th scope="col">Meeting</th>
@@ -727,6 +729,20 @@ pageTracker._trackPageview();
 <script src="https://code.jquery.com/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/~paolo/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- searchByDate Javascript functionality ================================== -->
+        <script type="text/javascript">
+            var link = document.getElementById("search-by-date");
+            var date = new Date();
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            var fullDate = "#" + day + "-" + month + "-" + year;
+            link.setAttribute("href", fullDate);
+            document.writeln(day);
+            document.writeln(month);
+            document.writeln(year);
+        </script>
 
 </body>
 
