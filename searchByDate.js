@@ -1,9 +1,10 @@
 var link = document.getElementById("search-by-date");
-
 var date = new Date();
 var day = date.getDate();
-var month = date.getMonth();
+var month = date.getMonth() + 1;
 var year = date.getFullYear();
-var fullDate = day + "-" + month + "-" year;
-
-link.setAttribute('href', fullDate);
+var fullDate = "#" + day + "-" + month + "-" + year;
+link.setAttribute("href", fullDate);
+document.writeln(day);
+document.writeln(month);
+document.writeln(year);
