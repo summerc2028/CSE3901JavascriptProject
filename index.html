@@ -49,6 +49,28 @@
 
 <script src='http://www.cse.ohio-state.edu/~paolo/javascript/activateCurrentTab.js'></script>
 
+<script>
+function toggle() {
+var date = new Date();
+var day = date.getDate();
+var month = date.getMonth() + 1;
+document.writeln(month);
+var year = date.getFullYear();
+var fullDate = day + "-" + month + "-" + year;
+var rows = document.getElementById("test1").getElementsByTagName("tr");
+var count = rows.length;
+for(var i=1;i<=count;i++){
+    if(rows.item(i).id<"07-01-2014"){
+        rows.item(i).style.display = 'none';
+    } 
+}
+//if( document.getElementById("6-1-2014").style.display=='none' ){
+ //  document.getElementById("6-1-2014").style.display = '';
+ //}else{
+ //  document.getElementById("6-1-2014").style.display = 'none';
+ //}
+}
+</script>
 
 
 </head>
@@ -167,8 +189,10 @@ to look at if you like, it is subject to change before its official posting.
 <h2> Tentative Schedule & Handouts </h2>
 
 <a id="search-by-date" href="NOLINK">Go To Next Class Date</a>
+<br />
+<button type="button" onClick="toggle()">Hide Page</button>
 
-<table border="on" class="zebra table table-striped">
+<table id="test1" border="on" class="zebra table table-striped">
 
 <tr> <th scope="col">Meeting</th>
      <th scope="col">Day</th>
@@ -177,7 +201,7 @@ to look at if you like, it is subject to change before its official posting.
      <th scope="col">Notes</th>
      <th scope="col">Other</th>
 </tr>
-<tr class="" id="6-1-2014"> <td scope="row">  1 </td>
+<tr class="" id="06-01-2014"> <td scope="row">  1 </td>
      <td> M </td>
      <td> Jan 6 </td>
      <td> Course Overview </td>
@@ -186,7 +210,7 @@ to look at if you like, it is subject to change before its official posting.
      <td> 
     </td>
 </tr>
-<tr class="" id="8-1-2014"> <td scope="row">  2 </td>
+<tr class="" id="08-01-2014"> <td scope="row">  2 </td>
      <td> W </td>
      <td> Jan 8 </td>
      <td> Group Formation </td>
