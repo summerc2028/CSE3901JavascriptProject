@@ -12,13 +12,12 @@ function getNearestDate(date) {
     }
 
     // Get formatted date string
-	var day = date.getDate();
-	day = day < 10 ? "0" + day : day; // force 2 digits
+	var year = date.getFullYear();
 	var month = date.getMonth() + 1;
 	month = month < 10 ? "0" + month : month; // force 2 digits
-	var year = date.getFullYear();
-	var fullDate = day + "-" + month + "-" + year;
-	document.writeln(fullDate);
+	var day = date.getDate();
+	day = day < 10 ? "0" + day : day; // force 2 digits
+	var fullDate = year + "-" + month + "-" + day;
 	var fragment = document.getElementById(fullDate);
 
 	// Search for an id matching the date
