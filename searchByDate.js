@@ -1,5 +1,7 @@
+// Find the nearest date fo class
 function getNearestDate(date) {
     
+    // Set static variable to 
     if(typeof getNearestDate.counter == 'undefined') {
         getNearestDate.counter = 0;
     }
@@ -10,9 +12,12 @@ function getNearestDate(date) {
     }
 
 	var day = date.getDate();
+	day = day < 10 ? "0" + day : day; // force 2 digits
 	var month = date.getMonth() + 1;
+	month = month < 10 ? "0" + month : month; // force 2 digits
 	var year = date.getFullYear();
 	var fullDate = day + "-" + month + "-" + year;
+	document.writeln(fullDate);
 	var fragment = document.getElementById(fullDate);
 
 	if (typeof(fragment) == 'undefined' || fragment == null)
@@ -24,6 +29,7 @@ function getNearestDate(date) {
 	}
 }
 
+// Event handler if no date is found
 function noDate() {
 	alert("There is no class scheduled within the next 7 days!");
 }
