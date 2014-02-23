@@ -49,30 +49,6 @@
 
 <script src='http://www.cse.ohio-state.edu/~paolo/javascript/activateCurrentTab.js'></script>
 
-<script>
-function toggle() {
-var date = new Date();
-var day = date.getDate();
-var month = date.getMonth() + 1;
-document.writeln(month);
-var year = date.getFullYear();
-var fullDate = day + "-" + month + "-" + year;
-var rows = document.getElementById("test1").getElementsByTagName("tr");
-var count = rows.length;
-for(var i=1;i<=count;i++){
-    if(rows.item(i).id<"07-01-2014"){
-        rows.item(i).style.display = 'none';
-    } 
-}
-//if( document.getElementById("6-1-2014").style.display=='none' ){
- //  document.getElementById("6-1-2014").style.display = '';
- //}else{
- //  document.getElementById("6-1-2014").style.display = 'none';
- //}
-}
-</script>
-
-
 </head>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
@@ -188,7 +164,7 @@ to look at if you like, it is subject to change before its official posting.
 
 <h2> Tentative Schedule & Handouts </h2>
 
-<a id="search-by-date" href="NOLINK">Go To Next Class Date</a>
+<a id="search-by-date">Go To Next Class Date</a>
 <br />
 <button type="button" onClick="toggle()">Hide Page</button>
 
@@ -755,7 +731,7 @@ pageTracker._trackPageview();
 <script src="/~paolo/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- searchByDate Javascript functionality ================================== -->
-        <script type="text/javascript" src="searchByDate.js"></script>
+<script type="text/javascript" src="searchByDate.js"></script>
 
 </body>
 
