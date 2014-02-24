@@ -51,6 +51,9 @@
 
   <script>
   function toggle() {
+    if(typeof toggle.flag == 'undefined'){
+        toggle.flag = true;
+    }
     var day = date.getDate();
     day = day < 10 ? "0" + day : day; // force 2 digits
     var month = date.getMonth() + 1;
@@ -59,13 +62,19 @@
     var fullDate = year + "-" + month + "-" + day;
     var rows = document.getElementById("test1").getElementsByTagName("tr");
     var count = rows.length;
-        for(var i=1;i<=count;i++){
-            if(rows.item(i).id<fullDate && rows.item(i).style.display == ''){
+    if(toggle.flag){
+        for(var i=1;i<count;i++){
+            if(rows.item(i).id<fullDate){
                 rows.item(i).style.display = 'none';
-            } else{
-                rows.item(i).style.display = '';
-            }
+            } 
         }
+        toggle.flag = false;       
+    }else{
+        for(var j=1;j<count;j++){
+            rows.item(j).style.display = '';
+        }   
+        toggle.flag = true;
+    }
 }
 </script>
 
