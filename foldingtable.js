@@ -8,7 +8,7 @@ function toggle() {
     month = month < 10 ? "0" + month : month; // force 2 digits
     var year = date.getFullYear();
     var fullDate = year + "-" + month + "-" + day;
-    var rows = document.getElementById("test1").getElementsByTagName("tr");
+    var rows = document.getElementById("classTable").getElementsByTagName("tr");
     var count = rows.length;
     if(toggle.flag){
       for(var i=1;i<count;i++){
