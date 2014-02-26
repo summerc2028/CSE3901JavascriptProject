@@ -26,3 +26,5 @@ function toggle() {
       toggle.flag = true;
     }
   }
+
+  document.getElementById("hide-button").addEventListener("click", toggle);
