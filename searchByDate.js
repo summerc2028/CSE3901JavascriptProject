@@ -44,5 +44,5 @@ var link = document.getElementById("search-by-date");
 if (nearestDate) {
 	link.setAttribute("href", "#" + nearestDate);
 } else {
-	link.addEventListener("click", noDate);
+	link.addEventListener("click", noDate, false);
 }

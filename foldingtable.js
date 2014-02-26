@@ -27,4 +27,4 @@ function toggle() {
     }
   }
 
-  document.getElementById("hide-button").addEventListener("click", toggle);
+  document.getElementById("hide-button").addEventListener("click", toggle, false);
