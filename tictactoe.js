@@ -1,3 +1,4 @@
+// Initialize Variables
 var	userInput = new Array();
 var	AIInput = new Array();
 var Painted = new Array();
