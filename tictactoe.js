@@ -1,21 +1,18 @@
-var userInput;
-var AIInput;
-var waitForUser;
-var counter=0; 
+var	userInput = new Array();
+var	AIInput = new Array();
+var Painted = new Array();
+var gameOver;
 var winDisplay;
+var winningComb;
 
 function start() {
-	userInput = new Array();
-	AIInput = new Array();
-	var i;
-	for (i = 0; i < 9; i++) {
-		userInput[i] = false;
-		AIInput[i] = false;
-	}
-	initializeCells();
-	waitForUser = true;
+	winningComb = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
 	winDisplay = document.getElementById("winState");
+	initializeCells();
+	gameOver = false;
 }
+
 
 function initializeCells() {
 	gameBoard.c0.value = '';
@@ -30,80 +27,204 @@ function initializeCells() {
 }
 
 function clicked (cell) {
-	if (waitForUser && cell.value == '') {
-		cell.value = "O";
-		userInput[Number(cell.name.charAt(1))] = true;
+	if (cell.value == '' && !gameOver ) {
+		cell.value = 'O';
+		userInput.push(Number(cell.name.charAt(1)));
+		checkIfUserWin();
+		checkIsTie();
+		AIMove();
+
 	}
-	handleUserInput(cell);
 }
 
 function userWin() {
-	winDisplay.innerHTML = "User Win!";
-	waitForUser = false;
+	winDisplay.innerHTML = "You Won!";
+}
+function AIWin() {
+	winDisplay.innerHTML = "You lost, So Close!";
 }
 
-function AIMove(num) {
-	AIInput[num] = true;
-	handleAIInput(cell);
-	waitForUser = true;
+
+function checkIfUserWin() {
+	for(var i = 0; i < winningComb.length; i++){
+		var checkLength = 0;
+		for(var j = 0; j < winningComb[i].length; j++) {
+			for(var k = 0; k < userInput.length; k++){
+				if (userInput[k]==winningComb[i][j]){
+					checkLength++;
+					if (checkLength == 3) {
+						userWin();
+						gameOver = true;
+						break;
+					}
+				}
+			}
+		}
+	}
 }
 
-function handleUserInput (cell) {
-	switch(cell.name)
-	{
-		case "c0":
-		if ((userInput[3] && userInput[6]) || (userInput[4] && userInput[8]) || (userInput[1] && userInput[2])) {
-			userWin();
-			return;
+function checkIfAIWin() {
+	for(var i = 0; i < winningComb.length; i++){
+		var checkLength = 0;
+		for(var j = 0; j < winningComb[i].length; j++) {
+			for(var k = 0; k < AIInput.length; k++){
+				if (AIInput[k]==winningComb[i][j]){
+					checkLength++;
+					if (checkLength == 3) {
+						AIWin();
+						gameOver = true;
+						break;
+					}
+				}
+			}
 		}
-		break;
-		case "c1":
-		if ((userInput[0] && userInput[2]) || (userInput[4] && userInput[7])) {
-			userWin();
-			return;
+	}
+}
+
+function AIPaint(num){
+	if (num == 0) {
+		gameBoard.c0.value = 'X';
+	} else 	if (num == 1) {
+		gameBoard.c1.value = 'X';
+	} else 	if (num==2) {
+		gameBoard.c2.value = 'X';
+	} else 	if (num==3) {
+		gameBoard.c3.value = 'X';
+	} else 	if (num==4) {
+		gameBoard.c4.value = 'X';
+	} else 	if (num==5) {
+		gameBoard.c5.value = 'X';
+	} else 	if (num==6) {
+		gameBoard.c6.value = 'X';
+	} else 	if (num==7) {
+		gameBoard.c7.value = 'X';
+	} else 	if (num==8) {
+		gameBoard.c8.value = 'X';
+	}
+}
+
+function checkIfPainted(num)	{
+	if (num==0) {
+		if (gameBoard.c0.value == '') return false;
+	} else 	if (num==1) {
+		if (gameBoard.c1.value == '') return false;
+	} else 	if (num==2) {
+		if (gameBoard.c2.value == '') return false;
+	} else 	if (num==3) {
+		if (gameBoard.c3.value == '') return false;
+	} else 	if (num==4) {
+		if (gameBoard.c4.value == '') return false;
+	} else 	if (num==5) {
+		if (gameBoard.c5.value == '') return false;
+	} else 	if (num==6) {
+		if (gameBoard.c6.value == '') return false;
+	} else 	if (num==7) {
+		if (gameBoard.c7.value == '') return false;
+	} else 	if (num==8) {
+		if (gameBoard.c8.value == '') return false;
+	}
+	return true;
+}
+
+function checkIsTie() {
+	var i = 0;
+	var isTie = true;
+	while (i < 9 ){
+		if (!checkIfPainted(i)){
+			isTie = false;
+			break;
 		}
-		break;
-		case "c2":
-		if ((userInput[0] && userInput[1]) || (userInput[5] && userInput[8]) || (userInput[4] && userInput[6])) {
-			userWin();
-			return;
+		i++;
+	}
+	if (isTie){
+	winDisplay.innerHTML = "That's a tie!";
+	}
+}
+
+function AIMove() {
+	var AImoved = false;
+	if (userInput.length == 1) {
+		if (checkIfPainted(4)){
+			AIPaint(0);
+			AIInput.push(0);
+			checkIfAIWin()
+		} else {
+			AIPaint(4);	
+			AIInput.push(4);
+			checkIfAIWin()
 		}
-		break;
-		case "c3":
-		if ((userInput[0] && userInput[6]) || (userInput[4] && userInput[5])) {
-			userWin();
-			return;
+	} else {
+		var i = 0;
+		while(i < winningComb.length && !AImoved){
+			var checkLength = 0;
+			var j = 0
+			while(j < winningComb[i].length && !AImoved) {
+				var k = 0;
+				while(k < AIInput.length && !AImoved){
+					if (AIInput[k]==winningComb[i][j]){
+						checkLength++;
+						if (checkLength == 2) {
+							var l = 0;
+							while (l < 3 && !AImoved){
+								if (!checkIfPainted(winningComb[i][l])){
+									AIPaint(winningComb[i][l]);
+									AIInput.push(winningComb[i][l]);
+									checkIfAIWin()
+									AImoved = true;
+									break;
+								}
+								l++;
+							}
+						}
+					}
+					k++;
+				}
+				j++;
+			}	
+			i++;
 		}
-		break;
-		case "c4":
-		if ((userInput[0] && userInput[8]) || (userInput[1] && userInput[7]) || (userInput[2] && userInput[6]) || (userInput[3] && userInput[5])) {
-			userWin();
-			return;
+		var i = 0;
+		while(i < winningComb.length && !AImoved){
+			var checkLength = 0;
+			var j = 0
+			while(j < winningComb[i].length && !AImoved) {
+				var k = 0;
+				while(k < userInput.length && !AImoved){
+					if (userInput[k]==winningComb[i][j]){
+						checkLength++;
+						if (checkLength == 2) {
+							var l = 0;
+							while (l < 3 && !AImoved){
+								if (!checkIfPainted(winningComb[i][l])){
+									AIPaint(winningComb[i][l]);
+									AIInput.push(winningComb[i][l]);
+									checkIfAIWin()
+									AImoved = true;
+									break;
+								}
+								l++;
+							}
+						}
+					}
+					k++;
+				}
+				j++;
+			}	
+			i++;
 		}
-		break;
-		case "c5":
-		if ((userInput[3] && userInput[4]) || (userInput[2] && userInput[8])) {
-			userWin();
-			return;
+
+		if (!AImoved) {
+			var i = 0;
+			while (!AImoved && i < 9){
+				if (!checkIfPainted(i)){
+					AIPaint(i);
+					AIInput.push(i);
+					checkIfAIWin()
+					AImoved = true;
+					break;
+				}
+				i++;
+			}
 		}
-		break;
-		case "c6":
-		if ((userInput[0] && userInput[3]) || (userInput[2] && userInput[4]) || (userInput[7] && userInput[8])) {
-			userWin();
-			return;
-		}
-		break;
-		case "c7":
-		if ((userInput[1] && userInput[4]) || (userInput[6] && userInput[8])) {
-			userWin();
-			return;
-		}
-		break;
-		case "c8":
-		if ((userInput[2] && userInput[5]) || (userInput[0] && userInput[4]) || (userInput[6] && userInput[7])) {
-			userWin();
-			return;
-		}
-		break;
 	}
 }

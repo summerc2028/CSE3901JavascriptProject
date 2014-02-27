@@ -6,25 +6,26 @@
 	<link type="text/css" rel="stylesheet" href="tictactoe.css" />
 </head>
 
-<body onload="start();">
+<body onload="start()">
 	<form name="gameBoard">
-		<table border=1>
+		<table border=1 >
 			<tr>
-				<td class=cell><input class=cell name=c0 type=button onclick="clicked(this);"></td>
-				<td class=cell><input class=cell name=c1 type=button onclick="clicked(this);"></td>
-				<td class=cell><input class=cell name=c2 type=button onclick="clicked(this);"></td>
+				<td class="cell"><input class="cell" name=c0 type=button onclick="clicked(this)" /></td>
+				<td class="cell"><input class="cell" name=c1 type=button onclick="clicked(this)" /></td>
+				<td class="cell"><input class="cell" name=c2 type=button onclick="clicked(this)" /></td>
 			</tr>
 			<tr>
-				<td class=cell><input class=cell name=c3 type=button onclick="clicked(this);"></td>
-				<td class=cell><input class=cell name=c4 type=button onclick="clicked(this);"></td>
-				<td class=cell><input class=cell name=c5 type=button onclick="clicked(this);"></td>
+				<td class="cell"><input class="cell" name=c3 type=button onclick="clicked(this)" /></td>
+				<td class="cell"><input class="cell" name=c4 type=button onclick="clicked(this)" /></td>
+				<td class="cell"><input class="cell" name=c5 type=button onclick="clicked(this)" /></td>
 			</tr>
 			<tr>
-				<td class=cell><input class=cell name=c6 type=button onclick="clicked(this);"></td>
-				<td class=cell><input class=cell name=c7 type=button onclick="clicked(this);"></td>
-				<td class=cell><input class=cell name=c8 type=button onclick="clicked(this);"></td>
+				<td class="cell"><input class="cell" name=c6 type=button onclick="clicked(this)" /></td>
+				<td class="cell"><input class="cell" name=c7 type=button onclick="clicked(this)" /></td>
+				<td class="cell"><input class="cell" name=c8 type=button onclick="clicked(this)" /></td>
 			</tr>
 		</table>
+		<input type="button" value="New Game" onClick="window.location.reload()">
 		<p id="winState"> </p>
 	</form>
 </body>
