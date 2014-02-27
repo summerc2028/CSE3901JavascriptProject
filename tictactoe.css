@@ -3,3 +3,7 @@
 	width: 60px;
 	font-size: 1.5em;
 }
+
+input[type=button] {
+    -webkit-appearance: button;
+}
