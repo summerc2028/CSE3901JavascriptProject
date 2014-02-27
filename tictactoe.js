@@ -1,7 +1,7 @@
 var	userInput = new Array();
 var	AIInput = new Array();
 var Painted = new Array();
-var gameOver;
+var gameOver = false;
 var winDisplay;
 var winningComb;
 
@@ -10,7 +10,6 @@ function start() {
 
 	winDisplay = document.getElementById("winState");
 	initializeCells();
-	gameOver = false;
 }
 
 
@@ -32,8 +31,9 @@ function clicked (cell) {
 		userInput.push(Number(cell.name.charAt(1)));
 		checkIfUserWin();
 		checkIsTie();
+		if (!gameOver){
 		AIMove();
-
+		}
 	}
 }
 
