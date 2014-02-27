@@ -17,35 +17,34 @@
 				<TD>
 
 					<br />
-					<input type="button" class="digit" value=" 7 " onClick="addChar(this.form.display, '7')">
-					<input type="button" class="digit" value=" 8 " onClick="addChar(this.form.display, '8')">
-					<input type="button" class="digit" value=" 9 " onClick="addChar(this.form.display, '9')">
-					<input type="button" value=" / " onClick="addChar(this.form.display, '/')">
+					<input id = "b7" type="button" value=" 7 " onClick="addChar(this.form.display, '7')">
+					<input id = "b8" type="button" value=" 8 " onClick="addChar(this.form.display, '8')">
+					<input id = "b9" type="button" value=" 9 " onClick="addChar(this.form.display, '9')">
+					<input id = "b/" type="button" value=" / " onClick="addChar(this.form.display, '/')">
 					<br />
-					<input type="button" class="digit" value=" 4 " onClick="addChar(this.form.display, '4')">
-					<input type="button" class="digit" value=" 5 " onClick="addChar(this.form.display, '5')">
-					<input type="button" class="digit" value=" 6 " onClick="addChar(this.form.display, '6')">
-					<input type="button" value=" * " onClick="addChar(this.form.display, '*')">
+					<input id = "b4" type="button" value=" 4 " onClick="addChar(this.form.display, '4')">
+					<input id = "b5" type="button" value=" 5 " onClick="addChar(this.form.display, '5')">
+					<input id = "b6" type="button" value=" 6 " onClick="addChar(this.form.display, '6')">
+					<input id = "b*" type="button" value=" * " onClick="addChar(this.form.display, '*')">
 					<br />
-					<input type="button" class="digit" value=" 1 " onClick="addChar(this.form.display, '1')">
-					<input type="button" class="digit" value=" 2 " onClick="addChar(this.form.display, '2')">
-					<input type="button" class="digit" value=" 3 " onClick="addChar(this.form.display, '3')">
-					<input type="button" value=" - " onClick="addChar(this.form.display, '-')">
+					<input id = "b1" type="button" value=" 1 " onClick="addChar(this.form.display, '1')">
+					<input id = "b2" type="button" value=" 2 " onClick="addChar(this.form.display, '2')">
+					<input id = "b3" type="button" value=" 3 " onClick="addChar(this.form.display, '3')">
+					<input id = "b-" type="button" value=" - " onClick="addChar(this.form.display, '-')">
 					<br />
-					<input type="button" class="digit" value=" 0 " onClick="addChar(this.form.display, '0')">
-					<input type="button" value=" .  " onClick="addChar(this.form.display, '.')">
-
-					<input type="button" value="=" name="enter" onClick="if (checkNum(this.form.display.value)) { calculate(this.form) }">
-					<input type="button" value=" + " onClick="addChar(this.form.display, '+')">
+					<input id = "b0" type="button" value=" 0 " onClick="addChar(this.form.display, '0')">
+					<input id = "b." type="button" value=" .  " onClick="addChar(this.form.display, '.')">
+					<input id = "b=" type="button" value="=" name="enter" onClick="if (checkNum(this.form.display.value)) { calculate(this.form) }">
+					<input id = "b+" type="button" value=" + " onClick="addChar(this.form.display, '+')">
 					<br />
 					<br />
-					<input type="button" value=" C " onClick="this.form.display.value = 0 ">
-					<input type="button" value=" << " onClick="delChar(this.form.display)">
+					<input id = "bC" type="button" value=" C " onClick="this.form.display.value = 0 ">
+					<input id = "b<<" type="button" value=" << " onClick="delChar(this.form.display)">
 					<br />
-					<input type="button" value=" MC " onclick="memclear(this)" />
-					<input type="button" value=" MR " onclick="memrecall(this)" />
-					<input type="button" value=" MS " onclick="memassign(this)" />
-					<input type="button" value=" M+ " onclick="memadd(this)" />
+					<input id = "bMC" type="button" value=" MC " onclick="memclear(this)" />
+					<input id = "bMR" type="button" value=" MR " onclick="memrecall(this)" />
+					<input id = "bMS" type="button" value=" MS " onclick="memassign(this)" />
+					<input id = "bM+" type="button" value=" M+ " onclick="memadd(this)" />
 					
 				</form>
 			</table>
