@@ -5,6 +5,8 @@ var Painted = new Array();
 var gameOver = false;
 var winDisplay;
 var winningComb;
+	window.onload=start;
+	document.getElementById("reload").addEventListener("click",function(){window.location.reload()},false);
 	gameBoard.c0.addEventListener("click", function(){clicked(gameBoard.c0)}, false);
 	gameBoard.c1.addEventListener("click", function(){clicked(gameBoard.c1)}, false);
 	gameBoard.c2.addEventListener("click", function(){clicked(gameBoard.c2)}, false);

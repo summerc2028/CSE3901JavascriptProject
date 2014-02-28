@@ -4,7 +4,7 @@
 	<title></title>
 	<link type="text/css" rel="stylesheet" href="tictactoe.css" />
 </head>
-<body onload="start()">
+<body>
 	<form name="gameBoard">
 		<table border="1">
 			<tr>
@@ -23,10 +23,9 @@
 				<td><input class="cell" name="c8" type="button"/></td>
 			</tr>
 		</table>
-		<input type="button" value="New Game" onclick="window.location.reload()"/>
+		<input id="reload" type="button" value="New Game"/>
 		<p id="winState"> </p>
 	</form>
 	<script type="text/javascript" src="tictactoe.js"></script>
 </body>
 </html>
-
