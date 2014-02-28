@@ -5,14 +5,8 @@ var Painted = new Array();
 var gameOver = false;
 var winDisplay;
 var winningComb;
-
-function start() {
-	winningComb = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-
-	winDisplay = document.getElementById("winState");
-	initializeCells();
 	gameBoard.c0.addEventListener("click", function(){clicked(gameBoard.c0)}, false);
- 	gameBoard.c1.addEventListener("click", function(){clicked(gameBoard.c1)}, false);
+	gameBoard.c1.addEventListener("click", function(){clicked(gameBoard.c1)}, false);
 	gameBoard.c2.addEventListener("click", function(){clicked(gameBoard.c2)}, false);
 	gameBoard.c3.addEventListener("click", function(){clicked(gameBoard.c3)}, false);
 	gameBoard.c4.addEventListener("click", function(){clicked(gameBoard.c4)}, false);
@@ -20,6 +14,13 @@ function start() {
 	gameBoard.c6.addEventListener("click", function(){clicked(gameBoard.c6)}, false);
 	gameBoard.c7.addEventListener("click", function(){clicked(gameBoard.c7)}, false);
 	gameBoard.c8.addEventListener("click", function(){clicked(gameBoard.c8)}, false);
+	
+
+function start() {
+	winningComb = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+	winDisplay = document.getElementById("winState");
+	initializeCells();
 }
 
 

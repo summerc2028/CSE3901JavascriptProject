@@ -1,4 +1,7 @@
+//Hides/Shows the table rows before the next occuring class period
 function toggle() {
+  
+  //Set static variable
   if(typeof toggle.flag == 'undefined'){
     toggle.flag = true;
   }
