@@ -183,6 +183,7 @@ function eval(op1, op2) {
 function clear() {
 	display.value = 0;
 	calc.bdec.disabled = false;
+	enableOps();
 	opCode = op.NONE;
 	lastButton = type.OP;
 }
