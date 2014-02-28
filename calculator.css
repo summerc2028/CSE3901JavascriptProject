@@ -1,0 +1,13 @@
+table {
+	width: 225px;
+}
+
+#display {
+	width: 100%;
+	font-size: 2em;
+}
+
+.key {
+	width: 100%;
+	font-size: 2em;
+}
