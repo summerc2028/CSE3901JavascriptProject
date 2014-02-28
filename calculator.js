@@ -1,30 +1,32 @@
-var prevOp;
-var currentOp;
-var opCount = 0;
-var calc;
-var display;
-var mem = 0;
-var type = {
+// Initialize Vars
+var prevOp; // operand 1
+var opCount = 0; // consecutive operands
+var calc; // calc form in DOM
+var display; // calc display in DOM
+var mem = 0; // value in memory
+var type = { // enum for function types
 	DIGIT: 0,
 	OP: 1,
 	EVAL: 2
 };
-var op = {
+var lastButton = type.DIGIT; // type of last function used
+var op = { // enum for last operation
 	NONE: 0,
 	ADD: 1,
 	SUB: 2,
 	MULT: 3,
 	DIV: 4
 };
-var lastButton = type.DIGIT;
-var opCode = op.NONE;
+var opCode = op.NONE; // last operation used
 
+// Assign variables and handlers
 function start() {
 	calc = document.getElementById("calc");
 	display = document.getElementById("display");
 	initializeCells();
 }
 
+// Assign event handlers
 function initializeCells() {
 	calc.b0.addEventListener("click", function(){addDigit(0)}, false);
 	calc.b1.addEventListener("click", function(){addDigit(1)}, false);
@@ -50,6 +52,7 @@ function initializeCells() {
 
 }
 
+// Concatenate digit to current value
 function addDigit(digit) {
 	if(display.value == null || display.value == "0" || lastButton == type.OP || lastButton == type.EVAL) {
 		display.value = digit;
@@ -62,6 +65,7 @@ function addDigit(digit) {
 	enableOps();
 }
 
+// Register add function
 function add() {
 	if (opCount >= 1) eval(prevOp, display.value);
 	prevOp = display.value;
@@ -72,6 +76,7 @@ function add() {
 	opCount++;
 }
 
+// Register subtract function
 function subtract() {
 	if (opCount >= 1) eval(prevOp, display.value);
 	prevOp = display.value;
@@ -82,6 +87,7 @@ function subtract() {
 	opCount++;
 }
 
+// Register multiply function
 function mult() {
 	if (opCount >= 1) eval(prevOp, display.value);
 	prevOp = display.value;
@@ -92,6 +98,7 @@ function mult() {
 	opCount++;
 }
 
+// Register divide function
 function divide() {
 	if (opCount >= 1) eval(prevOp, display.value);
 	prevOp = display.value;
@@ -102,6 +109,7 @@ function divide() {
 	opCount++;
 }
 
+// Disable operation buttons
 function disableOps() {
 	calc.badd.disabled = true;
 	calc.bsub.disabled = true;
@@ -110,6 +118,7 @@ function disableOps() {
 	calc.bequals.disabled = true;
 }
 
+// Enable operations buttons
 function enableOps() {
 	calc.badd.disabled = false;
 	calc.bsub.disabled = false;
@@ -118,6 +127,7 @@ function enableOps() {
 	calc.bequals.disabled = false;
 }
 
+// Enable/Disable decimal button
 function checkDec() {
 	if (display.value.contains('.')) {
 		calc.bdec.disabled = true;
@@ -126,6 +136,7 @@ function checkDec() {
 	}
 }
 
+// Evaluate registered function
 function eval(op1, op2) {
 	switch(opCode) {
 		case op.ADD: {
@@ -168,27 +179,34 @@ function eval(op1, op2) {
 	enableOps();
 }
 
+// Clear display
 function clear() {
 	display.value = 0;
 	calc.bdec.disabled = false;
+	opCode = op.NONE;
 	lastButton = type.OP;
 }
 
 // Memory Functions
+
+// Clear memory
 function memclear() {
 	mem = 0;
 }
 
+// Assign current value to memory
 function memassign() {
 	mem = display.value;
 	lastButton = type.OP;
 }
 
+// Place value in memory on display
 function memrecall() {
 	display.value = mem;
 	lastButton = type.OP;
 }
 
+// Add current value to value  stored in memory
 function memadd() {
 	mem = parseFloat(display.value) + parseFloat(mem);
 	lastButton = type.OP;
