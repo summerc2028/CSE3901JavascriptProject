@@ -57,8 +57,7 @@ function addDigit(digit) {
 	}
 	lastButton = type.DIGIT;
 	if (digit == '.') calc.bdec.disabled = true;
-	console.log("display.value = " + display.value);
-	console.log("lastButton = " + lastButton);
+	enableOps();
 }
 
 function add() {
@@ -67,6 +66,7 @@ function add() {
 	opCode = op.ADD;
 	lastButton = type.OP;
 	calc.bdec.disabled = false;
+	disableOps();
 	opCount++;
 }
 
@@ -76,6 +76,7 @@ function subtract() {
 	opCode = op.SUB;
 	lastButton = type.OP;
 	calc.bdec.disabled = false;
+	disableOps();
 	opCount++;
 }
 
@@ -85,6 +86,7 @@ function mult() {
 	opCode = op.MULT;
 	lastButton = type.OP;
 	calc.bdec.disabled = false;
+	disableOps();
 	opCount++;
 }
 
@@ -94,7 +96,24 @@ function divide() {
 	opCode = op.DIV;
 	lastButton = type.OP;
 	calc.bdec.disabled = false;
+	disableOps();
 	opCount++;
+}
+
+function disableOps() {
+	calc.badd.disabled = true;
+	calc.bsub.disabled = true;
+	calc.bmult.disabled = true;
+	calc.bdiv.disabled = true;
+	calc.bequals.disabled = true;
+}
+
+function enableOps() {
+	calc.badd.disabled = false;
+	calc.bsub.disabled = false;
+	calc.bmult.disabled = false;
+	calc.bdiv.disabled = false;
+	calc.bequals.disabled = false;
 }
 
 function eval(op1, op2) {
@@ -136,6 +155,7 @@ function eval(op1, op2) {
 	opCount = 0;
 	lastButton = type.EVAL;
 	calc.bdec.disabled = false;
+	enableOps();
 	console.log("prevOp = " + prevOp);
 }
 
@@ -148,16 +168,15 @@ function clear() {
 // Memory Functions
 function memclear() {
 	mem = 0;
-	calc.bdec.disabled = false;
+}
+
+function memassign() {
+	mem = display.value;
+	opCode = type.OP;
 }
 
 function memrecall(x) {
-	x.form.display.value = mem;
-	calc.bdec.disabled = false;
-}
-
-function memassign(x) {
-	mem = x.form.display.value;
+	display.value = mem;
 	calc.bdec.disabled = false;
 }
 
