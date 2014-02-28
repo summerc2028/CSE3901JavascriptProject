@@ -1,49 +1,51 @@
 <html>
 <head>
 	<title>Project Class Calculator with Memory</title>
+	<link rel="stylesheet" type="text/css" href="calculator.css">
 	<script type="text/javascript" language=javascript src="calculator.js"></script>
 </head>
 
-<body>
+<body onload="start()">
 	<form id="calc">
-		<table border=2>
-			<TR>
-				<TD>
-					<input name="display" value="0" size="15">
+		<table border=0>
+			<tr>
+				<td colspan="4">
+					<input id="display" value="0" size="15">
 					<br />
-				</TD>
-			</TR>
-			<TR>
-				<TD>
-					<br />
-					<input id = "b7" type="button" value=" 7 ">
-					<input id = "b8" type="button" value=" 8 ">
-					<input id = "b9" type="button" value=" 9 ">
-					<input id = "bdiv" type="button" value=" / ">
-					<br />
-					<input id = "b4" type="button" value=" 4 ">
-					<input id = "b5" type="button" value=" 5 ">
-					<input id = "b6" type="button" value=" 6 ">
-					<input id = "bmult" type="button" value=" * ">
-					<br />
-					<input id = "b1" type="button" value=" 1 ">
-					<input id = "b2" type="button" value=" 2 ">
-					<input id = "b3" type="button" value=" 3 ">
-					<input id = "bsub" type="button" value=" - ">
-					<br />
-					<input id = "b0" type="button" value=" 0 ">
-					<input id = "b." type="button" value=" .  " onClick="addChar(this.form.display, '.')">
-					<input id = "bequals" type="button" value="=" name="enter">
-					<input id = "badd" type="button" value=" + ">
-					<br />
-					<br />
-					<input id = "bC" type="button" value=" C " onClick="this.form.display.value = 0 ">
-					<br />
-					<input id = "bMC" type="button" value=" MC " onclick="memclear(this)" />
-					<input id = "bMR" type="button" value=" MR " onclick="memrecall(this)" />
-					<input id = "bMS" type="button" value=" MS " onclick="memassign(this)" />
-					<input id = "bM+" type="button" value=" M+ " onclick="memadd(this)" />
 				</td>
+			</tr>
+			<tr>
+				<td><input class="key" id="b7" type="button" value="7"></td>
+				<td><input class="key" id="b8" type="button" value="8"></td>
+				<td><input class="key" id="b9" type="button" value="9"></td>
+				<td><input class="key" id="bdiv" type="button" value="/"></td>
+			</tr>
+			<tr>
+				<td><input class="key" id="b4" type="button" value="4"></td>
+				<td><input class="key" id="b5" type="button" value="5"></td>
+				<td><input class="key" id="b6" type="button" value="6"></td>
+				<td><input class="key" id="bmult" type="button" value="*"></td>
+			</tr>
+			<tr>
+				<td><input class="key" id="b1" type="button" value="1"></td>
+				<td><input class="key" id="b2" type="button" value="2"></td>
+				<td><input class="key" id="b3" type="button" value="3"></td>
+				<td><input class="key" id="bsub" type="button" value="-"></td>
+			</tr>
+			<tr>
+				<td><input class="key" id="b0" type="button" value="0"></td>
+				<td><input class="key" id="bdec" type="button" value="."></td>
+				<td><input class="key" id="bequals" type="button" value="="></td>
+				<td><input class="key" id="badd" type="button" value="+"></td>
+			</tr>
+			<tr>
+				<td><input class="key" id="bC" type="button" value="C"></td>
+			</tr>
+			<tr>
+				<td><input class="key" id="bMC" type="button" value="MC" onclick="memclear(this)" /></td>
+				<td><input class="key" id="bMR" type="button" value="MR" onclick="memrecall(this)" /></td>
+				<td><input class="key" id="bMS" type="button" value="MS" onclick="memassign(this)" /></td>
+				<td><input class="key" id="bM+" type="button" value="M+" onclick="memadd(this)" /></td>
 			</tr>
 		</table>	
 	</form>

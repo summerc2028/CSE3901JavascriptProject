@@ -1,16 +1,27 @@
 var prevOp;
-var calc = 0;
+var currentOp;
+var opCount = 0;
+var calc;
+var display;
 var mem = 0;
-var opCode = {
+var type = {
+	DIGIT: 0,
+	OP: 1,
+	EVAL: 2
+};
+var op = {
 	NONE: 0,
 	ADD: 1,
 	SUB: 2,
 	MULT: 3,
 	DIV: 4
 };
+var lastButton = type.DIGIT;
+var opCode = op.NONE;
 
 function start() {
 	calc = document.getElementById("calc");
+	display = document.getElementById("display");
 	initializeCells();
 }
 
@@ -25,102 +36,132 @@ function initializeCells() {
 	calc.b7.addEventListener("click", function(){addDigit(7)}, false);
 	calc.b8.addEventListener("click", function(){addDigit(8)}, false);
 	calc.b9.addEventListener("click", function(){addDigit(9)}, false);
+	calc.bdec.addEventListener("click", function(){addDigit('.')}, false);
 
-	calc.bplus.addEventListener("click", add, false);
+	calc.badd.addEventListener("click", add, false);
 	calc.bsub.addEventListener("click", subtract, false);
 	calc.bmult.addEventListener("click", mult, false);
 	calc.bdiv.addEventListener("click", divide, false);
 
-	calc.bequals.addEventListener("click", function(){eval(prevOp, input.value)}, false)
+	calc.bequals.addEventListener("click", function(){eval(prevOp, display.value)}, false)
+	calc.bC.addEventListener("click", clear, false);
 
 }
 
-function addDigit(input) {
-	if(input.value == null || input.value == "0") {
-		input.value = input;
+function addDigit(digit) {
+	if(display.value == null || display.value == "0" || lastButton == type.OP || lastButton == type.EVAL) {
+		display.value = digit;
 	}
 	else {
-		input.value += input;
+		display.value += digit;
 	}
-	console.log("input.value = " + input.value);
+	lastButton = type.DIGIT;
+	if (digit == '.') calc.bdec.disabled = true;
+	console.log("display.value = " + display.value);
+	console.log("lastButton = " + lastButton);
 }
 
 function add() {
-	prevOp = input.value;
-	input.value = 0;
-	opCode = ADD;
+	if (opCount >= 1) eval(prevOp, display.value);
+	prevOp = display.value;
+	opCode = op.ADD;
+	lastButton = type.OP;
+	calc.bdec.disabled = false;
+	opCount++;
 }
 
 function subtract() {
-	prevOp = input.value;
-	input.value = 0;
-	opCode = SUB;
+	if (opCount >= 1) eval(prevOp, display.value);
+	prevOp = display.value;
+	opCode = op.SUB;
+	lastButton = type.OP;
+	calc.bdec.disabled = false;
+	opCount++;
 }
 
 function mult() {
-	prevOp = input.value;
-	input.value = 0;
-	opCode = MULT;
+	if (opCount >= 1) eval(prevOp, display.value);
+	prevOp = display.value;
+	opCode = op.MULT;
+	lastButton = type.OP;
+	calc.bdec.disabled = false;
+	opCount++;
 }
 
 function divide() {
-	prevOp = input.value;
-	input.value = 0;
-	opCode = DIV;
+	if (opCount >= 1) eval(prevOp, display.value);
+	prevOp = display.value;
+	opCode = op.DIV;
+	lastButton = type.OP;
+	calc.bdec.disabled = false;
+	opCount++;
 }
 
 function eval(op1, op2) {
 	switch(opCode) {
-		case opCode.ADD: {
-			return op1 + op2;
+		case op.ADD: {
+			if (lastButton != type.EVAL) {
+				prevOp = op2;
+			}
+			display.value = parseFloat(op1) + parseFloat(op2);
 			break;
 		}
-		case opCode.SUB: {
-			return op1 - op2;
+		case op.SUB: {
+			if (lastButton != type.EVAL) {
+				prevOp = -op2;
+			}
+			display.value = parseFloat(op1) - parseFloat(op2);
+			opCode = op.ADD;
 			break;
 		}
-		case opCode.MULT: {
-			return op1 * op2;
+		case op.MULT: {
+			if (lastButton != type.EVAL) {
+				prevOp = op2;
+			}
+			display.value = parseFloat(op1) * parseFloat(op2);
 			break;
 		}
-		case opCode.DIV: {
-			return op1 / op2;
+		case op.DIV: {
+			if (lastButton != type.EVAL) {
+				prevOp = 1/op2;
+			}
+			display.value = parseFloat(op1) / parseFloat(op2);
+			opCode = op.MULT;
 			break;
 		}
 		default: {
 			return "ERROR";
 		}
 	}
+	opCount = 0;
+	lastButton = type.EVAL;
+	calc.bdec.disabled = false;
+	console.log("prevOp = " + prevOp);
 }
 
-	// Memory Functions
-	function memadd (x) {
-		mem = parseInt (x.form.display.value) + parseInt (mem);
-	}
+function clear() {
+	display.value = 0;
+	calc.bdec.disabled = false;
+	lastButton = type.OP;
+}
 
-	function memcall (x) {
-		x.form.display.value = mem;
-	}
-	
-	function memclear (x) {
-		mem = 0;
-	}
+// Memory Functions
+function memclear() {
+	mem = 0;
+	calc.bdec.disabled = false;
+}
 
-	function memassign (x) {
-		mem = x.form.display.value;
-	}
+function memrecall(x) {
+	x.form.display.value = mem;
+	calc.bdec.disabled = false;
+}
 
-	// function checkNum(str)  {
-	// 	for (var i = 0; i < str.length; i++) {
-	// 		var y = str.substring(i, i+1);
-	// 		if (y < "0" || y > "9") {
-	// 			if (y != "/" && y != "*" && y != "+" && y !="-" && y != ".") {
-	// 				alert("not a valid input.")
-	// 				return false;
-	// 			}
-	// 		}
-	// 	}
-	// 	return true;
-	// }
+function memassign(x) {
+	mem = x.form.display.value;
+	calc.bdec.disabled = false;
+}
 
-	start();
+function memadd() {
+	mem = parseFloat(display.value) + parseFloat(mem);
+	calc.bdec.disabled = false;
+}
