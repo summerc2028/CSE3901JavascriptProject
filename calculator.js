@@ -46,6 +46,8 @@ function initializeCells() {
 	calc.bequals.addEventListener("click", function(){eval(prevOp, display.value)}, false)
 	calc.bC.addEventListener("click", clear, false);
 
+	display.addEventListener("change", checkDec, false);
+
 }
 
 function addDigit(digit) {
@@ -116,6 +118,14 @@ function enableOps() {
 	calc.bequals.disabled = false;
 }
 
+function checkDec() {
+	if (display.value.contains('.')) {
+		calc.bdec.disabled = true;
+	} else {
+		calc.bdec.disabled = false;
+	}
+}
+
 function eval(op1, op2) {
 	switch(opCode) {
 		case op.ADD: {
@@ -172,15 +182,15 @@ function memclear() {
 
 function memassign() {
 	mem = display.value;
-	opCode = type.OP;
+	lastButton = type.OP;
 }
 
-function memrecall(x) {
+function memrecall() {
 	display.value = mem;
-	calc.bdec.disabled = false;
+	lastButton = type.OP;
 }
 
 function memadd() {
 	mem = parseFloat(display.value) + parseFloat(mem);
-	calc.bdec.disabled = false;
+	lastButton = type.OP;
 }
