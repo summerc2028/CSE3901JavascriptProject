@@ -5,18 +5,18 @@ var Painted = new Array();
 var gameOver = false;
 var winDisplay;
 var winningComb;
-	window.onload=start;
-	document.getElementById("reload").addEventListener("click",function(){window.location.reload()},false);
-	gameBoard.c0.addEventListener("click", function(){clicked(gameBoard.c0)}, false);
-	gameBoard.c1.addEventListener("click", function(){clicked(gameBoard.c1)}, false);
-	gameBoard.c2.addEventListener("click", function(){clicked(gameBoard.c2)}, false);
-	gameBoard.c3.addEventListener("click", function(){clicked(gameBoard.c3)}, false);
-	gameBoard.c4.addEventListener("click", function(){clicked(gameBoard.c4)}, false);
-	gameBoard.c5.addEventListener("click", function(){clicked(gameBoard.c5)}, false);
-	gameBoard.c6.addEventListener("click", function(){clicked(gameBoard.c6)}, false);
-	gameBoard.c7.addEventListener("click", function(){clicked(gameBoard.c7)}, false);
-	gameBoard.c8.addEventListener("click", function(){clicked(gameBoard.c8)}, false);
-	
+window.onload=start;
+document.getElementById("reload").addEventListener("click",function(){window.location.reload()},false);
+gameBoard.c0.addEventListener("click", function(){clicked(gameBoard.c0)}, false);
+gameBoard.c1.addEventListener("click", function(){clicked(gameBoard.c1)}, false);
+gameBoard.c2.addEventListener("click", function(){clicked(gameBoard.c2)}, false);
+gameBoard.c3.addEventListener("click", function(){clicked(gameBoard.c3)}, false);
+gameBoard.c4.addEventListener("click", function(){clicked(gameBoard.c4)}, false);
+gameBoard.c5.addEventListener("click", function(){clicked(gameBoard.c5)}, false);
+gameBoard.c6.addEventListener("click", function(){clicked(gameBoard.c6)}, false);
+gameBoard.c7.addEventListener("click", function(){clicked(gameBoard.c7)}, false);
+gameBoard.c8.addEventListener("click", function(){clicked(gameBoard.c8)}, false);
+
 //the start function to initialize cells and winstates
 function start() {
 	winningCombo = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
@@ -37,7 +37,7 @@ function initializeCells() {
 	gameBoard.c8.value = '';
 }
 
-//get play's move
+//get player's move
 function clicked (cell) {
 	//if a cell is not played and the game is not over, then "O" is displayed in the cell as user input
 	if (cell.value == '' && !gameOver ) {
@@ -48,12 +48,12 @@ function clicked (cell) {
 		checkIsTie();
 		//after players move, it is the AI's turn
 		if (!gameOver){
-		AIMove();
+			AIMove();
 		}
 	}
 }
 
-//announce the game result when the player or the AI win
+//announce the game result when the player or the AI wins
 function userWin() {
 	winDisplay.innerHTML = "You Won!";
 }
@@ -62,19 +62,19 @@ function AIWin() {
 	winDisplay.innerHTML = "You lost, So Close!";
 }
 
-//check if user win
+//check if user wins
 function checkIfUserWin() {
 	//for each possible winning combination, check if the user's input matches the winning combination
 	for(var i = 0; i < winningCombo.length; i++){
 		var checkLength = 0;
 		for(var j = 0; j < winningCombo[i].length; j++) {
 			for(var k = 0; k < userInput.length; k++){
-				//in a specific combination, if the user has all three of the element, then the user win
+				//in a specific combination, if the user has all three of the element, then the user wins
 				if (userInput[k]==winningCombo[i][j]){
 					checkLength++;
 					if (checkLength == 3) {
 						userWin();
-						//the game is over when the user win
+						//the game is over when the user wins
 						gameOver = true;
 						break;
 					}
@@ -84,19 +84,19 @@ function checkIfUserWin() {
 	}
 }
 
-//check if AI win
+//check if AI wins
 function checkIfAIWin() {
 	//for each possible winning combination, check if the AI's input matches the winning combination
 	for(var i = 0; i < winningCombo.length; i++){
 		var checkLength = 0;
 		for(var j = 0; j < winningCombo[i].length; j++) {
 			for(var k = 0; k < AIInput.length; k++){
-				//in a specific combination, if the AI has all three of the element, then the AI win
+				//in a specific combination, if the AI has all three of the element, then the AI wins
 				if (AIInput[k]==winningCombo[i][j]){
 					checkLength++;
 					if (checkLength == 3) {
 						AIWin();
-						//the game is over when the AI win
+						//the game is over when the AI wins
 						gameOver = true;
 						break;
 					}
@@ -165,7 +165,7 @@ function checkIsTie() {
 		i++;
 	}
 	if (isTie){
-	winDisplay.innerHTML = "That's a tie!";
+		winDisplay.innerHTML = "That's a tie!";
 	}
 }
 
