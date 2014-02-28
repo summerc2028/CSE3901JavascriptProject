@@ -166,7 +166,6 @@ function eval(op1, op2) {
 	lastButton = type.EVAL;
 	calc.bdec.disabled = false;
 	enableOps();
-	console.log("prevOp = " + prevOp);
 }
 
 function clear() {
