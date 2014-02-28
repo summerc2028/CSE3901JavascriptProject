@@ -4,6 +4,7 @@ var	AIInput = new Array();
 var Painted = new Array();
 var gameOver = false;
 var winDisplay;
+<<<<<<< HEAD
 var winningComb;
 	window.onload=start;
 	document.getElementById("reload").addEventListener("click",function(){window.location.reload()},false);
@@ -17,15 +18,29 @@ var winningComb;
 	gameBoard.c7.addEventListener("click", function(){clicked(gameBoard.c7)}, false);
 	gameBoard.c8.addEventListener("click", function(){clicked(gameBoard.c8)}, false);
 	
+=======
+var winningCombo;
+>>>>>>> c0431a700c6c20b143a5c24445dd17e8f2688a2a
 
+//add event listeners for buttons
+gameBoard.c0.addEventListener("click", function(){clicked(gameBoard.c0)}, false);
+gameBoard.c1.addEventListener("click", function(){clicked(gameBoard.c1)}, false);
+gameBoard.c2.addEventListener("click", function(){clicked(gameBoard.c2)}, false);
+gameBoard.c3.addEventListener("click", function(){clicked(gameBoard.c3)}, false);
+gameBoard.c4.addEventListener("click", function(){clicked(gameBoard.c4)}, false);
+gameBoard.c5.addEventListener("click", function(){clicked(gameBoard.c5)}, false);
+gameBoard.c6.addEventListener("click", function(){clicked(gameBoard.c6)}, false);
+gameBoard.c7.addEventListener("click", function(){clicked(gameBoard.c7)}, false);
+gameBoard.c8.addEventListener("click", function(){clicked(gameBoard.c8)}, false);
+	
+//the start function to initialize cells and winstates
 function start() {
-	winningComb = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-
+	winningCombo = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 	winDisplay = document.getElementById("winState");
 	initializeCells();
 }
 
-
+//initialize cells to ""
 function initializeCells() {
 	gameBoard.c0.value = '';
 	gameBoard.c1.value = '';
@@ -38,35 +53,44 @@ function initializeCells() {
 	gameBoard.c8.value = '';
 }
 
+//get play's move
 function clicked (cell) {
+	//if a cell is not played and the game is not over, then "O" is displayed in the cell as user input
 	if (cell.value == '' && !gameOver ) {
 		cell.value = 'O';
+		//store user input in an array
 		userInput.push(Number(cell.name.charAt(1)));
 		checkIfUserWin();
 		checkIsTie();
+		//after players move, it is the AI's turn
 		if (!gameOver){
 		AIMove();
 		}
 	}
 }
 
+//announce the game result when the player or the AI win
 function userWin() {
 	winDisplay.innerHTML = "You Won!";
 }
+
 function AIWin() {
 	winDisplay.innerHTML = "You lost, So Close!";
 }
 
-
+//check if user win
 function checkIfUserWin() {
-	for(var i = 0; i < winningComb.length; i++){
+	//for each possible winning combination, check if the user's input matches the winning combination
+	for(var i = 0; i < winningCombo.length; i++){
 		var checkLength = 0;
-		for(var j = 0; j < winningComb[i].length; j++) {
+		for(var j = 0; j < winningCombo[i].length; j++) {
 			for(var k = 0; k < userInput.length; k++){
-				if (userInput[k]==winningComb[i][j]){
+				//in a specific combination, if the user has all three of the element, then the user win
+				if (userInput[k]==winningCombo[i][j]){
 					checkLength++;
 					if (checkLength == 3) {
 						userWin();
+						//the game is over when the user win
 						gameOver = true;
 						break;
 					}
@@ -76,15 +100,19 @@ function checkIfUserWin() {
 	}
 }
 
+//check if AI win
 function checkIfAIWin() {
-	for(var i = 0; i < winningComb.length; i++){
+	//for each possible winning combination, check if the AI's input matches the winning combination
+	for(var i = 0; i < winningCombo.length; i++){
 		var checkLength = 0;
-		for(var j = 0; j < winningComb[i].length; j++) {
+		for(var j = 0; j < winningCombo[i].length; j++) {
 			for(var k = 0; k < AIInput.length; k++){
-				if (AIInput[k]==winningComb[i][j]){
+				//in a specific combination, if the AI has all three of the element, then the AI win
+				if (AIInput[k]==winningCombo[i][j]){
 					checkLength++;
 					if (checkLength == 3) {
 						AIWin();
+						//the game is over when the AI win
 						gameOver = true;
 						break;
 					}
@@ -94,6 +122,7 @@ function checkIfAIWin() {
 	}
 }
 
+//AI marks a cell as "X" with a given cell number
 function AIPaint(num){
 	if (num == 0) {
 		gameBoard.c0.value = 'X';
@@ -116,6 +145,7 @@ function AIPaint(num){
 	}
 }
 
+//check if the specific cell number is occupied, return false if it is not and return true otherwise
 function checkIfPainted(num)	{
 	if (num==0) {
 		if (gameBoard.c0.value == '') return false;
@@ -139,6 +169,7 @@ function checkIfPainted(num)	{
 	return true;
 }
 
+//if all of the 9 cells are played and there is still no winner, announce a tie
 function checkIsTie() {
 	var i = 0;
 	var isTie = true;
@@ -154,8 +185,12 @@ function checkIsTie() {
 	}
 }
 
+//AI makes a play after each user's move
 function AIMove() {
 	var AImoved = false;
+	//for the first move, if the user click on the center cell, 
+	//then the AI will check the first cell. Otherwise, AI picks center
+	//everytime the AI makes a play, store the move to the AIInput array 
 	if (userInput.length == 1) {
 		if (checkIfPainted(4)){
 			AIPaint(0);
@@ -166,22 +201,27 @@ function AIMove() {
 			AIInput.push(4);
 			checkIfAIWin()
 		}
+		//when it is not the first AI move
 	} else {
+		//for all of the possible winning combinations, 
+		//if the AI's input contains 2 of the 3 cells that makes it win 
+		//and the third cell is not occupied then play it.
 		var i = 0;
-		while(i < winningComb.length && !AImoved){
+		while(i < winningCombo.length && !AImoved){
 			var checkLength = 0;
 			var j = 0
-			while(j < winningComb[i].length && !AImoved) {
+			while(j < winningCombo[i].length && !AImoved) {
 				var k = 0;
 				while(k < AIInput.length && !AImoved){
-					if (AIInput[k]==winningComb[i][j]){
+					if (AIInput[k]==winningCombo[i][j]){
 						checkLength++;
 						if (checkLength == 2) {
 							var l = 0;
+							//check if the third cell is open
 							while (l < 3 && !AImoved){
-								if (!checkIfPainted(winningComb[i][l])){
-									AIPaint(winningComb[i][l]);
-									AIInput.push(winningComb[i][l]);
+								if (!checkIfPainted(winningCombo[i][l])){
+									AIPaint(winningCombo[i][l]);
+									AIInput.push(winningCombo[i][l]);
 									checkIfAIWin()
 									AImoved = true;
 									break;
@@ -196,21 +236,25 @@ function AIMove() {
 			}	
 			i++;
 		}
+		//for all of the possible winning combinations, 
+		//if the user's input contains 2 of the 3 cells that makes the user win 
+		//and the third cell is not occupied then play it
 		var i = 0;
-		while(i < winningComb.length && !AImoved){
+		while(i < winningCombo.length && !AImoved){
 			var checkLength = 0;
 			var j = 0
-			while(j < winningComb[i].length && !AImoved) {
+			while(j < winningCombo[i].length && !AImoved) {
 				var k = 0;
 				while(k < userInput.length && !AImoved){
-					if (userInput[k]==winningComb[i][j]){
+					if (userInput[k]==winningCombo[i][j]){
 						checkLength++;
 						if (checkLength == 2) {
 							var l = 0;
+							//check if the third cell is open
 							while (l < 3 && !AImoved){
-								if (!checkIfPainted(winningComb[i][l])){
-									AIPaint(winningComb[i][l]);
-									AIInput.push(winningComb[i][l]);
+								if (!checkIfPainted(winningCombo[i][l])){
+									AIPaint(winningCombo[i][l]);
+									AIInput.push(winningCombo[i][l]);
 									checkIfAIWin()
 									AImoved = true;
 									break;
@@ -226,6 +270,9 @@ function AIMove() {
 			i++;
 		}
 
+		//if there is no cell can be played to stop the user winning
+		//and if there is no cell cen be played to let the AI win
+		//then play the cell that has the lowest id number
 		if (!AImoved) {
 			var i = 0;
 			while (!AImoved && i < 9){
