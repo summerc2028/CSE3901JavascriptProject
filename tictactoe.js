@@ -5,18 +5,18 @@ var Painted = new Array();
 var gameOver = false;
 var winDisplay;
 var winningComb;
-	window.onload=start;
-	document.getElementById("reload").addEventListener("click",function(){window.location.reload()},false);
-	gameBoard.c0.addEventListener("click", function(){clicked(gameBoard.c0)}, false);
-	gameBoard.c1.addEventListener("click", function(){clicked(gameBoard.c1)}, false);
-	gameBoard.c2.addEventListener("click", function(){clicked(gameBoard.c2)}, false);
-	gameBoard.c3.addEventListener("click", function(){clicked(gameBoard.c3)}, false);
-	gameBoard.c4.addEventListener("click", function(){clicked(gameBoard.c4)}, false);
-	gameBoard.c5.addEventListener("click", function(){clicked(gameBoard.c5)}, false);
-	gameBoard.c6.addEventListener("click", function(){clicked(gameBoard.c6)}, false);
-	gameBoard.c7.addEventListener("click", function(){clicked(gameBoard.c7)}, false);
-	gameBoard.c8.addEventListener("click", function(){clicked(gameBoard.c8)}, false);
-	
+window.onload=start;
+document.getElementById("reload").addEventListener("click",function(){window.location.reload()},false);
+gameBoard.c0.addEventListener("click", function(){clicked(gameBoard.c0)}, false);
+gameBoard.c1.addEventListener("click", function(){clicked(gameBoard.c1)}, false);
+gameBoard.c2.addEventListener("click", function(){clicked(gameBoard.c2)}, false);
+gameBoard.c3.addEventListener("click", function(){clicked(gameBoard.c3)}, false);
+gameBoard.c4.addEventListener("click", function(){clicked(gameBoard.c4)}, false);
+gameBoard.c5.addEventListener("click", function(){clicked(gameBoard.c5)}, false);
+gameBoard.c6.addEventListener("click", function(){clicked(gameBoard.c6)}, false);
+gameBoard.c7.addEventListener("click", function(){clicked(gameBoard.c7)}, false);
+gameBoard.c8.addEventListener("click", function(){clicked(gameBoard.c8)}, false);
+
 //the start function to initialize cells and winstates
 function start() {
 	winningCombo = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
@@ -48,7 +48,7 @@ function clicked (cell) {
 		checkIsTie();
 		//after players move, it is the AI's turn
 		if (!gameOver){
-		AIMove();
+			AIMove();
 		}
 	}
 }
@@ -165,7 +165,7 @@ function checkIsTie() {
 		i++;
 	}
 	if (isTie){
-	winDisplay.innerHTML = "That's a tie!";
+		winDisplay.innerHTML = "That's a tie!";
 	}
 }
 
