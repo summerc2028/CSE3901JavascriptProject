@@ -50,6 +50,27 @@ function initializeCells() {
 
 	display.addEventListener("change", checkDec, false);
 
+	//Added support for key presses
+	document.addEventListener("keypress",function(event){
+		if(event.keyCode == 48){addDigit(0);}
+		if(event.keyCode == 49){addDigit(1);}
+		if(event.keyCode == 50){addDigit(2);}
+		if(event.keyCode == 51){addDigit(3);}
+		if(event.keyCode == 52){addDigit(4);}
+		if(event.keyCode == 53){addDigit(5);}
+		if(event.keyCode == 54){addDigit(6);}
+		if(event.keyCode == 55){addDigit(7);}
+		if(event.keyCode == 56){addDigit(8);}
+		if(event.keyCode == 57){addDigit(9);}
+		if(event.keyCode == 13){eval(prevOp, display.value);}
+		if(event.keyCode == 42){mult();}
+		if(event.keyCode == 43){add();}
+		if(event.keyCode == 47){divide();}
+		if(event.keyCode == 45){subtract();}
+		if(event.keyCode == 46){addDigit('.');}
+		if(event.keyCode == 61){eval(prevOp, display.value);}
+	});
+
 }
 
 // Concatenate digit to current value
